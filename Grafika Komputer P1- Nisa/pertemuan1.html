@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #mycanvas {
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="mycanvas" width="600" height="600">
+    </canvas>
+    <script>
+        const kanvas = document.querySelector("#mycanvas");
+        console.log(kanvas);
+        const ctx = kanvas.getContext("2d");
+
+        // ctx.fillRect(0,0,100,100);
+
+        // ambil data
+        let dataGambar = ctx.getImageData(0,0,kanvas.width, kanvas.height);
+
+        // membuat sebuah function / i = x + (y . w) + 4
+        function gbr_titik(datanya, posisi, warna){
+            // let x = posisi.x;
+            // let y = posisi.y;
+            let {x, y} = posisi;
+            let {r, g, b} = warna;
+            let index = (x + y * kanvas.width) * 4;
+            datanya.data[index] = r;
+            datanya.data[index+1] = g;
+            datanya.data[index+2] = b;
+            datanya.data[index+3] = 255;
+        }
+        
+        // membuat kotak
+        for (let j = 0; j<100; j++){
+            for (let i = 0;i<100;i++){
+                gbr_titik(dataGambar, {x:100 + i,y:50+j}, {r:255,g:0,b:0});
+            }
+        }
+
+        //garis miring
+        // for (k = 0; k < 100;k++){ 
+        //     gbr_titik(dataGambar, {x:100 + k, y:200 + k}, {r:255,g:0,b:0});
+        // }
+
+        // membuat segitiga 1
+        for (let i = 0; i<100; i++){
+            for (let j = 0; j<i+1;j++){
+                gbr_titik(dataGambar, {x:100 + j,y:180+i}, {r:255,g:0,b:0});
+            }
+        }
+
+        // membuat segitiga 2
+        for (let i = 0; i<100; i++){
+            for (let j = 0; j<i+1;j++){
+                gbr_titik(dataGambar, {x:100 + i,y:300+j}, {r:255,g:0,b:0});
+            }
+        }
+
+        // Soal 4
+        for (let i = 0; i<100; i++){
+            for (let j = 0; j<i+1;j++){
+                gbr_titik(dataGambar, {x:100 + i,y:420+j}, {r:255,g:0,b:0});
+            }
+        }
+
+        for (let i = 0; i<100; i++){
+            for (let j = 0; j<i+1;j++){
+                gbr_titik(dataGambar, {x:100 + j,y:420+i}, {r:20,g:0,b:0});
+            }
+        }
+
+        // Soal 5
+        for (let i = 0; i<100; i++){
+            for (let j = 0; j<i+1;j++){
+                gbr_titik(dataGambar, {x:300 + i,y:50+j}, {r:255,g:0,b:0});
+            }
+        }
+
+        for (let i = 0; i<100; i++){
+            for (let j = 0; j<i+1;j++){
+                gbr_titik(dataGambar, {x:300 + j,y:50+i}, {r:125,g:0,b:0});
+            }
+        }
+
+        for (let j = 0; j<50; j++){
+            for (let i = 0;i<50;i++){
+                gbr_titik(dataGambar, {x:325 + i,y:75+j}, {r:0,g:0,b:0});
+            }
+        }
+
+//         // soal 5 wih fungsi
+// function persegi
+//         for (let i = 0; i<100; i++){
+//             for (let j = 0; j<i+1;j++){
+//                 gbr_titik(dataGambar, {x:300 + i,y:50+j}, {r:255,g:0,b:0});
+//             }
+//         }
+
+//         for (let i = 0; i<100; i++){
+//             for (let j = 0; j<i+1;j++){
+//                 gbr_titik(dataGambar, {x:300 + j,y:50+i}, {r:125,g:0,b:0});
+//             }
+//         }
+
+//         for (let j = 0; j<50; j++){
+//             for (let i = 0;i<50;i++){
+//                 gbr_titik(dataGambar, {x:325 + i,y:75+j}, {r:0,g:0,b:0});
+//             }
+//         }
+
+
+
+        ctx.putImageData(dataGambar,0,0);
+        
+</script>
+</body>
+</html>
